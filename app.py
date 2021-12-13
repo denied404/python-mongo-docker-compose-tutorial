@@ -64,7 +64,7 @@ def search_by_name():
 def mark_as_done():
     todo_id = request.values.get("_id")
     collection.update_one({"_id": ObjectId(todo_id)}, {"$set": {"done": "yes"}})
-    return redirect("/")
+    return "The card has been marked as done"
 
 
 # http://localhost:5000/add
@@ -81,7 +81,7 @@ def add():
         "date": date,
         "done": "no"
     })
-    return redirect("/list")
+    return "A new card has been added"
 
 
 # http://localhost:5000/delete?_id=...
@@ -91,4 +91,4 @@ def add():
 def remove():
     key = request.values.get("_id")
     collection.delete_one({"_id": ObjectId(key)})
-    return redirect("/")
+    return "The card has been successfully deleted"
